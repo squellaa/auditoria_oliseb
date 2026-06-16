@@ -4,7 +4,8 @@ import InyeccionSQL from './components/InyeccionSQL';
 import XSSReflejado from './components/XSSReflejado';
 import CommandInjection from './components/CommandInjection';
 import Matriz from './components/Matriz';
-import { Shield, Database, Code, Terminal, Server } from 'lucide-react';
+import Galeria from './components/Galeria';
+import { Shield, Database, Code, Terminal, Server, Image } from 'lucide-react';
 
 export default function App() {
   const [tabActual, setTabActual] = useState('resumen');
@@ -83,6 +84,18 @@ export default function App() {
             <Shield className="w-4 h-4" /> Matriz de Riesgo
           </button>
 
+          {/* Botón: Galería de Evidencias */}
+          <button
+            onClick={() => setTabActual('galeria')}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              tabActual === 'galeria' 
+                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+            }`}
+          >
+            <ImageSquare className="w-4 h-4" /> Galería de Evidencias
+          </button>
+
           {/* Botón: Inyección de Comandos */}
           <button
             onClick={() => setTabActual('command')}
@@ -103,6 +116,7 @@ export default function App() {
             {tabActual === 'sqli' && <InyeccionSQL />}
             {tabActual === 'xss' && <XSSReflejado />}
             {tabActual === 'matriz' && <Matriz />}
+            {tabActual === 'galeria' && <Galeria />}
             {tabActual === 'command' && <CommandInjection />}
           </div>
         </main>
