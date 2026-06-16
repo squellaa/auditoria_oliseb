@@ -3,6 +3,7 @@ import Resumen from './components/Resumen';
 import InyeccionSQL from './components/InyeccionSQL';
 import XSSReflejado from './components/XSSReflejado';
 import CommandInjection from './components/CommandInjection';
+import Matriz from './components/Matriz';
 import { Shield, Database, Code, Terminal, Server } from 'lucide-react';
 
 export default function App() {
@@ -11,14 +12,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col selection:bg-emerald-500/30 selection:text-emerald-300">
       {/* HEADER */}
-      <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+      <header className="border-b border-slate-800 bg-slate-900 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/25">
             <Shield className="w-6 h-6 text-emerald-400" />
           </div>
           <div>
-            <h1 className="text-lg font-bold tracking-tight text-white">SuperMax — Portal de Clientes</h1>
-            <p className="text-xs text-slate-400 font-medium">Auditoría de Seguridad Web | Oliseb</p>
+            <h1 className="text-lg font-bold tracking-tight text-white">Auditoría de Seguridad - SuperMax</h1>
+            <p className="text-xs text-slate-400 font-medium">Portal de Auditoría y Evaluación de Riesgos | Oliseb</p>
           </div>
         </div>
         <div className="text-right hidden sm:block">
@@ -70,6 +71,18 @@ export default function App() {
             <Code className="w-4 h-4" /> XSS Reflejado
           </button>
 
+          {/* Botón: Matriz de Riesgo */}
+          <button
+            onClick={() => setTabActual('matriz')}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+              tabActual === 'matriz' 
+                ? 'bg-violet-500/10 text-violet-400 border border-violet-500/20' 
+                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
+            }`}
+          >
+            <Shield className="w-4 h-4" /> Matriz de Riesgo
+          </button>
+
           {/* Botón: Inyección de Comandos */}
           <button
             onClick={() => setTabActual('command')}
@@ -85,10 +98,11 @@ export default function App() {
 
         {/* CONTENEDOR DE CONTENIDO */}
         <main className="flex-1 p-6 md:p-8 bg-slate-950/40">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {tabActual === 'resumen' && <Resumen />}
             {tabActual === 'sqli' && <InyeccionSQL />}
             {tabActual === 'xss' && <XSSReflejado />}
+            {tabActual === 'matriz' && <Matriz />}
             {tabActual === 'command' && <CommandInjection />}
           </div>
         </main>
