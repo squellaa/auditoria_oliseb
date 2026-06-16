@@ -40,6 +40,18 @@ export default function CommandInjection() {
           </ul>
         </div>
       </div>
+
+      <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6">
+        <h3 className="text-sm font-semibold text-slate-300 mb-3">Evidencia de la prueba</h3>
+        <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-900 p-2">
+          <img
+            src="/img/comandos_oliseb.png"
+            alt="Evidencia de Inyección de Comandos"
+            className="w-full h-auto rounded-lg object-cover"
+            onError={(e) => { e.target.src = 'https://placehold.co/600x400/1e293b/fff?text=Evidencia+comandos_oliseb.png'; }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
