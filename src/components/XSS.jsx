@@ -40,6 +40,22 @@ const XSS = () => {
       </div>
 
       <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-400 shadow-xl shadow-slate-950/20">
+        <h3 className="text-xl font-semibold text-slate-100">Evidencia Visual</h3>
+        <p className="mt-3 text-sm text-slate-400">
+          Resultado del ataque XSS reflejado en el entorno de pruebas del portal SuperMax.
+        </p>
+        <div className="mt-4 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 p-2">
+          <img
+            src="/img/xss_oliseb.png"
+            alt="Evidencia de XSS Reflejado"
+            className="h-auto w-full rounded-xl object-cover"
+            loading="lazy"
+            onError={(e) => { e.target.src = 'https://placehold.co/1200x700/1e293b/fff?text=Evidencia+xss_oliseb.png'; }}
+          />
+        </div>
+      </div>
+
+      <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-400 shadow-xl shadow-slate-950/20">
         <h3 className="text-xl font-semibold text-slate-100">Mitigación</h3>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-400">
           <li>Escapar o codificar toda salida de datos controlada por el usuario.</li>

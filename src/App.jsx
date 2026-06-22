@@ -24,11 +24,28 @@ const accentStyles = {
   red: 'text-red-400 border-red-500/20 bg-red-500/10',
 };
 
+const indicadores = [
+  { title: 'Hallazgos críticos', value: '3', detail: 'Riesgos de alta prioridad identificados' },
+  { title: 'Activos revisados', value: '12', detail: 'Datos de clientes, sesiones y fidelización' },
+  { title: 'Controles sugeridos', value: '9', detail: 'Técnicos, preventivos y de monitoreo' },
+  { title: 'Estado actual', value: 'Expuesto', detail: 'Requiere plan de remediación inmediato' },
+];
+
+const planMitigacion = [
+  { fase: '0-15 días', objetivo: 'Contención urgente', acciones: 'Prepared statements, sanitización de salida y bloqueo de payloads conocidos.' },
+  { fase: '15-45 días', objetivo: 'Fortalecimiento', acciones: 'Hardening de sesión, CSP estricta, validaciones de backend y logging de seguridad.' },
+  { fase: '45-90 días', objetivo: 'Madurez operativa', acciones: 'Pruebas continuas, revisiones de código y monitoreo de indicadores de riesgo.' },
+];
+
 export default function App() {
   const [tabActual, setTabActual] = useState('resumen');
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500/30 selection:text-emerald-300">
+    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500/30 selection:text-emerald-300">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -left-20 top-0 h-80 w-80 rounded-full bg-emerald-500/12 blur-3xl" />
+        <div className="absolute right-0 top-20 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl" />
+      </div>
       <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl px-4 py-4 shadow-[0_1px_0_rgba(148,163,184,0.08)] sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
@@ -77,6 +94,37 @@ export default function App() {
             </div>
           </section>
 
+          <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {indicadores.map((item) => (
+              <article key={item.title} className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-slate-950/20">
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{item.title}</p>
+                <p className="mt-3 text-3xl font-semibold text-white">{item.value}</p>
+                <p className="mt-2 text-sm text-slate-400">{item.detail}</p>
+              </article>
+            ))}
+          </section>
+
+          <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-xl shadow-slate-950/20">
+            <div className="flex flex-col gap-4 border-b border-slate-800 pb-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Plan ejecutivo</p>
+                <h3 className="mt-2 text-xl font-semibold text-white">Hoja de ruta de mitigación</h3>
+              </div>
+              <span className="inline-flex rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-amber-300">
+                Prioridad: alta
+              </span>
+            </div>
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              {planMitigacion.map((item) => (
+                <article key={item.fase} className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+                  <p className="text-xs uppercase tracking-[0.25em] text-slate-500">{item.fase}</p>
+                  <h4 className="mt-2 text-base font-semibold text-white">{item.objetivo}</h4>
+                  <p className="mt-2 text-sm leading-6 text-slate-400">{item.acciones}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <div className="grid gap-6 xl:grid-cols-[280px_1fr]">
             <aside className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-slate-950/20">
               <p className="mb-4 text-xs uppercase tracking-[0.28em] text-slate-500">Secciones</p>
@@ -103,6 +151,15 @@ export default function App() {
                     </button>
                   );
                 })}
+              </div>
+
+              <div className="mt-5 rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+                <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Acciones inmediatas</p>
+                <ul className="mt-3 space-y-2 text-sm text-slate-300">
+                  <li>1. Corregir consultas vulnerables a SQLi.</li>
+                  <li>2. Aplicar Output Encoding para XSS.</li>
+                  <li>3. Restringir ejecución de comandos en backend.</li>
+                </ul>
               </div>
             </aside>
 
