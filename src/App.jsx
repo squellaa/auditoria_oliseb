@@ -1,11 +1,11 @@
-﻿import React, { useState } from 'react';
+﻿import { useState } from 'react';
 import Resumen from './components/Resumen';
 import InyeccionSQL from './components/InyeccionSQL';
 import XSS from './components/XSS';
 import Comandos from './components/Comandos';
 import Matriz from './components/Matriz';
 import Galeria from './components/Galeria';
-import { Shield, Database, Code, Terminal, Server, Image, ImageSquare } from 'lucide-react';
+import { Shield, Database, Code, Terminal, Server, Image } from 'lucide-react';
 
 const sections = [
   { key: 'resumen', label: 'Resumen Ejecutivo', icon: Server, accent: 'emerald' },
