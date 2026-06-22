@@ -1,130 +1,140 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import Resumen from './components/Resumen';
 import InyeccionSQL from './components/InyeccionSQL';
-import XSSReflejado from './components/XSSReflejado';
-import CommandInjection from './components/CommandInjection';
+import XSS from './components/XSS';
+import Comandos from './components/Comandos';
 import Matriz from './components/Matriz';
 import Galeria from './components/Galeria';
-import { Shield, Database, Code, Terminal, Server, Image } from 'lucide-react';
+import { Shield, Database, Code, Terminal, Server, Image, ImageSquare } from 'lucide-react';
+
+const sections = [
+  { key: 'resumen', label: 'Resumen Ejecutivo', icon: Server, accent: 'emerald' },
+  { key: 'sqli', label: 'Inyección SQL', icon: Database, accent: 'amber' },
+  { key: 'xss', label: 'XSS Reflejado', icon: Code, accent: 'sky' },
+  { key: 'matriz', label: 'Matriz de Riesgo', icon: Shield, accent: 'violet' },
+  { key: 'galeria', label: 'Galería de Evidencias', icon: Image, accent: 'emerald' },
+  { key: 'comandos', label: 'Inyección de Comandos', icon: Terminal, accent: 'red' },
+];
+
+const accentStyles = {
+  emerald: 'text-emerald-400 border-emerald-500/20 bg-emerald-500/10',
+  amber: 'text-amber-400 border-amber-500/20 bg-amber-500/10',
+  sky: 'text-sky-400 border-sky-500/20 bg-sky-500/10',
+  violet: 'text-violet-400 border-violet-500/20 bg-violet-500/10',
+  red: 'text-red-400 border-red-500/20 bg-red-500/10',
+};
 
 export default function App() {
   const [tabActual, setTabActual] = useState('resumen');
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans flex flex-col selection:bg-emerald-500/30 selection:text-emerald-300">
-      {/* HEADER */}
-      <header className="border-b border-slate-800 bg-slate-900 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/25">
-            <Shield className="w-6 h-6 text-emerald-400" />
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500/30 selection:text-emerald-300">
+      <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl px-4 py-4 shadow-[0_1px_0_rgba(148,163,184,0.08)] sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-2 text-emerald-400">
+              <Shield className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Informe de Auditoría</p>
+              <h1 className="text-xl font-semibold text-white sm:text-2xl">Auditoría de Seguridad - SuperMax</h1>
+              <p className="mt-1 text-sm text-slate-400">Presentación ejecutiva y técnica de hallazgos para despliegue profesional en Vercel.</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-lg font-bold tracking-tight text-white">Auditoría de Seguridad - SuperMax</h1>
-            <p className="text-xs text-slate-400 font-medium">Portal de Auditoría y Evaluación de Riesgos | Oliseb</p>
+          <div className="hidden items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/80 px-4 py-3 text-sm text-slate-300 sm:flex">
+            <span>Auditor: S. Olivares Squella</span>
+            <span className="h-4 w-px bg-slate-700" />
+            <span>INACAP Valparaíso</span>
           </div>
-        </div>
-        <div className="text-right hidden sm:block">
-          <span className="text-xs bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-md text-slate-300 font-mono">
-            Auditor: S. Olivares Squella
-          </span>
         </div>
       </header>
 
-      {/* CUERPO PRINCIPAL */}
-      <div className="flex flex-1 flex-col md:flex-row">
-        {/* SIDEBAR / MENÚ LATERAL */}
-        <aside className="w-full md:w-64 border-r border-slate-800 bg-slate-900/20 p-4 space-y-2">
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-3 mb-3">Secciones</p>
-          
-          {/* Botón: Resumen */}
-          <button
-            onClick={() => setTabActual('resumen')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tabActual === 'resumen' 
-                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-            }`}
-          >
-            <Server className="w-4 h-4" /> Resumen Ejecutivo
-          </button>
+      <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl space-y-6">
+          <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-xl shadow-slate-950/30">
+            <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr] lg:items-center">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Resumen del informe</p>
+                <h2 className="mt-3 text-3xl font-semibold text-white">Visualización clara para tomadores de decisiones y equipos técnicos</h2>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
+                  Este informe presenta los hallazgos clave de la auditoría de seguridad del portal SuperMax, con énfasis en riesgos críticos, recomendaciones de mitigación y evidencias visuales.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-3xl border border-slate-800 bg-slate-950/60 p-4 text-sm text-slate-300">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Alcance</p>
+                  <p className="mt-2 font-semibold text-white">Portal de clientes</p>
+                </div>
+                <div className="rounded-3xl border border-slate-800 bg-slate-950/60 p-4 text-sm text-slate-300">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Riesgos</p>
+                  <p className="mt-2 font-semibold text-white">Alta prioridad</p>
+                </div>
+                <div className="rounded-3xl border border-slate-800 bg-slate-950/60 p-4 text-sm text-slate-300">
+                  <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Formato</p>
+                  <p className="mt-2 font-semibold text-white">Informe web</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          {/* Botón: Inyección SQL */}
-          <button
-            onClick={() => setTabActual('sqli')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tabActual === 'sqli' 
-                ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' 
-                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-            }`}
-          >
-            <Database className="w-4 h-4" /> Inyección SQL
-          </button>
+          <div className="grid gap-6 xl:grid-cols-[280px_1fr]">
+            <aside className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-slate-950/20">
+              <p className="mb-4 text-xs uppercase tracking-[0.28em] text-slate-500">Secciones</p>
+              <div className="space-y-2">
+                {sections.map((section) => {
+                  const Icon = section.icon;
+                  const isActive = tabActual === section.key;
+                  return (
+                    <button
+                      key={section.key}
+                      onClick={() => setTabActual(section.key)}
+                      className={`w-full rounded-2xl border px-4 py-3 text-left text-sm font-medium transition duration-200 ${
+                        isActive
+                          ? `border-current ${accentStyles[section.accent]} bg-slate-950/70`
+                          : 'border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-950/60 hover:text-slate-100'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="rounded-xl bg-slate-950/80 p-2 text-slate-400">
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <span>{section.label}</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </aside>
 
-          {/* Botón: XSS Reflejado */}
-          <button
-            onClick={() => setTabActual('xss')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tabActual === 'xss' 
-                ? 'bg-sky-500/10 text-sky-400 border border-sky-500/20' 
-                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-            }`}
-          >
-            <Code className="w-4 h-4" /> XSS Reflejado
-          </button>
+            <section className="space-y-6">
+              <div className="rounded-3xl border border-slate-800 bg-slate-950/80 p-5 shadow-xl shadow-slate-950/30">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Contenido activo</p>
+                    <h2 className="mt-2 text-2xl font-semibold text-white">{sections.find((item) => item.key === tabActual)?.label}</h2>
+                  </div>
+                  <div className="inline-flex rounded-full border border-slate-800 bg-slate-900/70 px-4 py-2 text-xs uppercase tracking-[0.22em] text-slate-400">
+                    {tabActual === 'resumen' ? 'Resumen ejecutivo' : 'Detalle técnico'}
+                  </div>
+                </div>
+              </div>
 
-          {/* Botón: Matriz de Riesgo */}
-          <button
-            onClick={() => setTabActual('matriz')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tabActual === 'matriz' 
-                ? 'bg-violet-500/10 text-violet-400 border border-violet-500/20' 
-                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-            }`}
-          >
-            <Shield className="w-4 h-4" /> Matriz de Riesgo
-          </button>
-
-          {/* Botón: Galería de Evidencias */}
-          <button
-            onClick={() => setTabActual('galeria')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tabActual === 'galeria' 
-                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-            }`}
-          >
-            <ImageSquare className="w-4 h-4" /> Galería de Evidencias
-          </button>
-
-          {/* Botón: Inyección de Comandos */}
-          <button
-            onClick={() => setTabActual('command')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-              tabActual === 'command' 
-                ? 'bg-red-500/10 text-red-400 border border-red-500/20' 
-                : 'text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-            }`}
-          >
-            <Terminal className="w-4 h-4" /> Inyección de Comandos
-          </button>
-        </aside>
-
-        {/* CONTENEDOR DE CONTENIDO */}
-        <main className="flex-1 p-6 md:p-8 bg-slate-950/40">
-          <div className="max-w-4xl mx-auto">
-            {tabActual === 'resumen' && <Resumen />}
-            {tabActual === 'sqli' && <InyeccionSQL />}
-            {tabActual === 'xss' && <XSSReflejado />}
-            {tabActual === 'matriz' && <Matriz />}
-            {tabActual === 'galeria' && <Galeria />}
-            {tabActual === 'command' && <CommandInjection />}
+              <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-xl shadow-slate-950/30">
+                {tabActual === 'resumen' && <Resumen />}
+                {tabActual === 'sqli' && <InyeccionSQL />}
+                {tabActual === 'xss' && <XSS />}
+                {tabActual === 'matriz' && <Matriz />}
+                {tabActual === 'galeria' && <Galeria />}
+                {tabActual === 'comandos' && <Comandos />}
+              </div>
+            </section>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
 
-      {/* FOOTER */}
-      <footer className="border-t border-slate-900 bg-slate-950 px-6 py-4 text-center text-xs text-slate-500">
-        Fundamentos de Seguridad de la Información — INACAP Valparaíso.
+      <footer className="border-t border-slate-900 bg-slate-950 px-4 py-5 text-center text-sm text-slate-500 sm:px-6 lg:px-8">
+        <p>Auditoría SuperMax — Presentación profesional para Vercel.</p>
+        <p className="mt-1">Diseño optimizado para claridad ejecutiva y evidencia técnica.</p>
       </footer>
     </div>
   );

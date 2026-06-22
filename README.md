@@ -1,16 +1,29 @@
-# React + Vite
+﻿# Auditoría de Seguridad - SuperMax
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Presentación documental de hallazgos de seguridad para el portal de clientes de SuperMax. Esta interfaz está diseñada para Vercel con un estilo profesional, navegación clara y énfasis en riesgos críticos y recomendaciones de mitigación.
 
-Currently, two official plugins are available:
+## Qué incluye
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Resumen ejecutivo de la auditoría
+- Análisis de vulnerabilidades: inyección SQL, XSS y ejecución de comandos
+- Matriz de riesgo con clasificación de impacto y probabilidad
+- Galería de evidencias de prueba
+- Diseño en modo oscuro con aspecto corporativo
 
-## React Compiler
+## Stack tecnológico
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- Tailwind CSS
+- Lucide React
 
-## Expanding the ESLint configuration
+## Cómo ejecutar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clonar el repositorio.
+2. Ejecutar `npm install`.
+3. Ejecutar `npm run dev` para desarrollo.
+4. Ejecutar `npm run build` para producción.
+
+## Despliegue en Vercel
+
+Vercel detecta automáticamente el proyecto Vite. Solo es necesario conectar el repositorio y usar el comando de construcción `npm run build`.
