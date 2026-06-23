@@ -11,9 +11,9 @@ const sections = [
   { key: 'resumen', label: 'Resumen Ejecutivo', icon: Server, accent: 'emerald' },
   { key: 'sqli', label: 'Inyección SQL', icon: Database, accent: 'amber' },
   { key: 'xss', label: 'XSS Reflejado', icon: Code, accent: 'sky' },
+  { key: 'comandos', label: 'Inyección de Comandos', icon: Terminal, accent: 'red' },
   { key: 'matriz', label: 'Matriz de Riesgo', icon: Shield, accent: 'violet' },
   { key: 'galeria', label: 'Galería de Evidencias', icon: Image, accent: 'emerald' },
-  { key: 'comandos', label: 'Inyección de Comandos', icon: Terminal, accent: 'red' },
 ];
 
 const accentStyles = {
@@ -41,15 +41,16 @@ export default function App() {
   const [tabActual, setTabActual] = useState('resumen');
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 font-sans selection:bg-emerald-500/30 selection:text-emerald-300">
+    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100 font-sans selection:bg-amber-500/30 selection:text-amber-100">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-20 top-0 h-80 w-80 rounded-full bg-emerald-500/12 blur-3xl" />
-        <div className="absolute right-0 top-20 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl" />
+        <div className="absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-500/15 blur-3xl" />
+        <div className="absolute right-0 top-20 h-72 w-72 rounded-full bg-amber-500/15 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(148,163,184,0.12)_1px,transparent_1px)] bg-[size:22px_22px] opacity-20" />
       </div>
       <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl px-4 py-4 shadow-[0_1px_0_rgba(148,163,184,0.08)] sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-2 text-emerald-400">
+            <div className="rounded-2xl border border-cyan-500/30 bg-cyan-500/10 p-2 text-cyan-300">
               <Shield className="h-6 w-6" />
             </div>
             <div>
@@ -72,9 +73,9 @@ export default function App() {
             <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr] lg:items-center">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Resumen del informe</p>
-                <h2 className="mt-3 text-3xl font-semibold text-white">Visualización clara para tomadores de decisiones y equipos técnicos</h2>
+                <h2 className="mt-3 text-3xl font-semibold text-white">Análisis técnico con trazabilidad de riesgo y priorización ejecutiva</h2>
                 <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300">
-                  Este informe presenta los hallazgos clave de la auditoría de seguridad del portal SuperMax, con énfasis en riesgos críticos, recomendaciones de mitigación y evidencias visuales.
+                  Este informe cruza evidencia técnica de laboratorio con impacto de negocio para SuperMax. Cada vulnerabilidad incluye su CVSS, su ubicación en la matriz de riesgo y la justificación del puntaje asignado.
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-3">
@@ -84,11 +85,11 @@ export default function App() {
                 </div>
                 <div className="rounded-3xl border border-slate-800 bg-slate-950/60 p-4 text-sm text-slate-300">
                   <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Riesgos</p>
-                  <p className="mt-2 font-semibold text-white">Alta prioridad</p>
+                  <p className="mt-2 font-semibold text-white">Priorizados por matriz</p>
                 </div>
                 <div className="rounded-3xl border border-slate-800 bg-slate-950/60 p-4 text-sm text-slate-300">
                   <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Formato</p>
-                  <p className="mt-2 font-semibold text-white">Informe web</p>
+                  <p className="mt-2 font-semibold text-white">CVSS + Riesgo negocio</p>
                 </div>
               </div>
             </div>
@@ -110,7 +111,7 @@ export default function App() {
                 <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Plan ejecutivo</p>
                 <h3 className="mt-2 text-xl font-semibold text-white">Hoja de ruta de mitigación</h3>
               </div>
-              <span className="inline-flex rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-amber-300">
+                <span className="inline-flex rounded-full border border-red-500/20 bg-red-500/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-red-300">
                 Prioridad: alta
               </span>
             </div>
@@ -158,7 +159,7 @@ export default function App() {
                 <ul className="mt-3 space-y-2 text-sm text-slate-300">
                   <li>1. Corregir consultas vulnerables a SQLi.</li>
                   <li>2. Aplicar Output Encoding para XSS.</li>
-                  <li>3. Restringir ejecución de comandos en backend.</li>
+                  <li>3. Bloquear ejecución de comandos del SO.</li>
                 </ul>
               </div>
             </aside>
@@ -180,9 +181,9 @@ export default function App() {
                 {tabActual === 'resumen' && <Resumen />}
                 {tabActual === 'sqli' && <InyeccionSQL />}
                 {tabActual === 'xss' && <XSS />}
+                {tabActual === 'comandos' && <Comandos />}
                 {tabActual === 'matriz' && <Matriz />}
                 {tabActual === 'galeria' && <Galeria />}
-                {tabActual === 'comandos' && <Comandos />}
               </div>
             </section>
           </div>
