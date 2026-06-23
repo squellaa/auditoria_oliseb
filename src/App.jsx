@@ -3,16 +3,22 @@ import Resumen from './components/Resumen';
 import InyeccionSQL from './components/InyeccionSQL';
 import XSS from './components/XSS';
 import Comandos from './components/Comandos';
+import Activos from './components/Activos';
 import Matriz from './components/Matriz';
+import Controles from './components/Controles';
+import Recuperacion from './components/Recuperacion';
 import Galeria from './components/Galeria';
-import { Shield, Database, Code, Terminal, Server, Image } from 'lucide-react';
+import { Shield, Database, Code, Terminal, Server, Image, Boxes, ShieldCheck, LifeBuoy } from 'lucide-react';
 
 const sections = [
   { key: 'resumen', label: 'Resumen Ejecutivo', icon: Server, accent: 'emerald' },
   { key: 'sqli', label: 'Inyección SQL', icon: Database, accent: 'amber' },
   { key: 'xss', label: 'XSS Reflejado', icon: Code, accent: 'sky' },
   { key: 'comandos', label: 'Inyección de Comandos', icon: Terminal, accent: 'red' },
+  { key: 'activos', label: 'Activos y Riesgos', icon: Boxes, accent: 'emerald' },
   { key: 'matriz', label: 'Matriz de Riesgo', icon: Shield, accent: 'violet' },
+  { key: 'controles', label: 'Controles', icon: ShieldCheck, accent: 'sky' },
+  { key: 'recuperacion', label: 'Recuperación DR', icon: LifeBuoy, accent: 'amber' },
   { key: 'galeria', label: 'Galería de Evidencias', icon: Image, accent: 'emerald' },
 ];
 
@@ -26,8 +32,8 @@ const accentStyles = {
 
 const indicadores = [
   { title: 'Hallazgos críticos', value: '3', detail: 'Riesgos de alta prioridad identificados' },
-  { title: 'Activos revisados', value: '12', detail: 'Datos de clientes, sesiones y fidelización' },
-  { title: 'Controles sugeridos', value: '9', detail: 'Técnicos, preventivos y de monitoreo' },
+  { title: 'Activos revisados', value: '5', detail: 'Activos criticos del portal retail priorizados' },
+  { title: 'Controles sugeridos', value: '12', detail: 'Prevencion, mitigacion y recuperacion (DR)' },
   { title: 'Estado actual', value: 'Expuesto', detail: 'Requiere plan de remediación inmediato' },
 ];
 
@@ -160,6 +166,7 @@ export default function App() {
                   <li>1. Corregir consultas vulnerables a SQLi.</li>
                   <li>2. Aplicar Output Encoding para XSS.</li>
                   <li>3. Bloquear ejecución de comandos del SO.</li>
+                  <li>4. Probar plan DR con RTO y respaldo verificado.</li>
                 </ul>
               </div>
             </aside>
@@ -182,7 +189,10 @@ export default function App() {
                 {tabActual === 'sqli' && <InyeccionSQL />}
                 {tabActual === 'xss' && <XSS />}
                 {tabActual === 'comandos' && <Comandos />}
+                {tabActual === 'activos' && <Activos />}
                 {tabActual === 'matriz' && <Matriz />}
+                {tabActual === 'controles' && <Controles />}
+                {tabActual === 'recuperacion' && <Recuperacion />}
                 {tabActual === 'galeria' && <Galeria />}
               </div>
             </section>
