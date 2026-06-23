@@ -1,12 +1,14 @@
 # 05 - Activos y Riesgos
 
-## Activos críticos
+## Activos criticos del portal (clasificados)
 
-- Base de datos de clientes de fidelización
-- Servidor web del portal de clientes
-- Información de tarjetas de fidelización y saldos de puntos
-- Historial de compras y transacciones
-- Credenciales de acceso de usuarios y administradores
+| Activo | Clasificacion | Relevancia en rubro retail |
+|---|---|---|
+| Base de datos de clientes y fidelizacion | Critico | Soporta puntos, compras, identidad de clientes y promociones. |
+| Servidor web y API del portal | Critico | Mantiene continuidad del canal digital de atencion y ventas. |
+| Sesiones y credenciales de clientes | Alto | Habilita acceso a cuentas, canje de beneficios y datos personales. |
+| Reglas de promociones y saldos de puntos | Alto | Impacta ingresos, fraude de beneficios y confianza de clientes. |
+| Logs de auditoria y monitoreo | Medio-Alto | Permite deteccion de fraude y trazabilidad para cumplimiento. |
 
 ## Riesgos asociados al rubro retail
 
@@ -16,9 +18,12 @@
 - Interrupción de servicios de atención al cliente y campañas promocionales
 - Incumplimiento de normativas de protección de datos
 
-## Riesgos más relevantes
+## Vinculo vulnerabilidad -> activos en riesgo (3.1.2)
 
-- Exposición de la base de datos de clientes
-- Acceso no autorizado a cuentas de fidelización
-- Manipulación de saldos y recompensas
-- Interrupción del servicio por ataques al servidor web
+- Inyeccion SQL -> base de datos de clientes, reglas de promociones, saldos de puntos.
+- XSS reflejado -> sesiones de clientes, credenciales activas, datos personales visibles en cuenta.
+- Inyeccion de comandos -> servidor/API, logs de auditoria, posibilidad de acceder a base de datos por pivote.
+
+## Conclusiones de negocio
+
+En SuperMax, el mayor riesgo no es solo tecnico: una brecha puede traducirse en fraude de fidelizacion, perdida reputacional y quiebre de continuidad en campañas comerciales.

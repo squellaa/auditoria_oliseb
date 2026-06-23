@@ -1,23 +1,21 @@
 # 07 - Controles de Prevención y Mitigación
 
-## Políticas de prevención
+## Politicas de prevencion (3.1.4)
 
-- Implementar validación y sanitización de todas las entradas del usuario.
-- Usar consultas parametrizadas para todas las operaciones SQL.
-- Configurar políticas de seguridad de contenido (CSP) para mitigar XSS.
-- Aplicar listas blancas en los puntos donde se aceptan comandos o rutas.
-- Asegurar que las cookies de sesión sean `HttpOnly` y `Secure`.
+- Riesgo 20 (Inyeccion de comandos): prohibir ejecucion de shell con entrada de usuario y usar solo APIs seguras.
+- Riesgo 16 (Inyeccion SQL): prepared statements obligatorios y validacion tipada en backend.
+- Riesgo 9 (XSS reflejado): output encoding contextual + CSP estricta + sanitizacion server-side.
+- En sesion de clientes: cookies de sesion con HttpOnly, Secure y SameSite.
 
-## Controles técnicos
+## Controles de mitigacion (3.1.5)
 
-- Autenticación y autorización robusta para acceso al portal.
-- Monitoreo de eventos inusuales y alertas en el backend.
-- Encriptación de datos en tránsito y en reposo.
-- Segmentación de la red y separación de ambientes de producción.
+- Riesgos rojos (20 y 16): WAF con reglas SQLi/XSS y bloqueo adaptativo por reputacion de IP.
+- Riesgos rojos (20 y 16): segmentacion de red entre web, app y BD para limitar movimiento lateral.
+- Riesgo naranjo (9): monitoreo de sesiones anormales y cierre automatizado de cuentas comprometidas.
+- Todos los riesgos: SIEM + correlacion de eventos para deteccion temprana y respuesta.
 
-## Mitigación de incidentes
+## Marco de referencia
 
-- Bloquear y aislar rápidamente cuentas comprometidas.
-- Limitar los privilegios del servidor y de la base de datos.
-- Revisar y aplicar parches de seguridad al software del portal.
-- Auditar cambios en las configuraciones y el acceso a datos sensibles.
+- OWASP Top 10 2021 (A03 Injection).
+- CIS Controls v8 (4 Secure Configuration, 8 Audit Log Management, 13 Network Monitoring).
+- NIST SP 800-53 (SI-4, IR-4, AC-6).

@@ -11,23 +11,27 @@ Se utiliza la regla: Riesgo = Probabilidad x Impacto.
 | 2 (Bajo)               | 2        | 4  | 6  | 8  | 10     |
 | 1 (Insignificante)     | 1        | 2  | 3  | 4  | 5      |
 
+Mapa de calor:
+
+- Verde: 1 a 7
+- Amarillo/Naranjo: 8 a 14
+- Rojo: 15 a 25
+
 ## Ubicacion de hallazgos en la matriz
 
-- Inyeccion de comandos: Probabilidad 4, Impacto 5, Riesgo 20 (Critico).
-- Inyeccion SQL: Probabilidad 4, Impacto 4, Riesgo 16 (Alto).
-- XSS reflejado: Probabilidad 3, Impacto 3, Riesgo 9 (Medio).
+- Inyeccion de comandos: Probabilidad 4, Impacto 5, Riesgo 20 (Rojo).
+- Inyeccion SQL: Probabilidad 4, Impacto 4, Riesgo 16 (Rojo).
+- XSS reflejado: Probabilidad 3, Impacto 3, Riesgo 9 (Amarillo/Naranjo).
 
 ## Justificacion de priorizacion
 
-- Inyeccion de comandos queda en prioridad 1 porque compromete infraestructura y servicio.
-- Inyeccion SQL queda en prioridad 2 por exposicion masiva de datos de clientes.
-- XSS reflejado queda en prioridad 3 porque depende de interaccion de la victima.
+- Inyeccion de comandos queda en prioridad 1 porque compromete infraestructura y continuidad del portal retail. CVSS 9.8 y riesgo 20.
+- Inyeccion SQL queda en prioridad 2 por exposicion masiva de datos de clientes y fraude de beneficios. CVSS 8.2 y riesgo 16.
+- XSS reflejado queda en prioridad 3 porque depende de interaccion de la victima, aunque mantiene riesgo sobre sesiones. CVSS 6.1 y riesgo 9.
 
-## Leyenda
+## Coherencia CVSS + Matriz (3.1.3)
 
-- Verde: 1 a 7 (riesgo bajo).
-- Amarillo: 8 a 14 (riesgo medio).
-- Rojo: 15 a 25 (riesgo alto/critico).
+El orden de atencion es consistente entre severidad tecnica (CVSS) y riesgo de negocio (matriz). Esto evita priorizacion arbitraria y asegura foco en impactos operacionales del rubro.
 
 ## Riesgo principal
 
