@@ -86,10 +86,11 @@ export default function Matriz() {
                 {probabilityLevels.map((probability) => {
                   const score = getScore(impact, probability);
                   const attack = getAttackAtCell(impact, probability);
+                  const isTopRisk = attack?.name === 'Inyeccion de comandos';
                   return (
                   <td
                     key={`${impact}-${probability}`}
-                    className={`${getCellClasses(score)} border px-3 py-3 text-center font-semibold align-top min-w-28`}
+                    className={`${getCellClasses(score)} border px-3 py-3 text-center font-semibold align-top min-w-28 ${isTopRisk ? 'ring-2 ring-red-300/70 shadow-lg shadow-red-900/40' : ''}`}
                   >
                     <div className="flex flex-col items-center gap-2">
                       <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-bold tracking-[0.08em] ${score >= 15 ? 'bg-red-700/60 ring-2 ring-red-300/60' : score >= 8 ? 'bg-amber-700/50' : 'bg-emerald-700/40'}`}>
@@ -100,6 +101,11 @@ export default function Matriz() {
                           <div className="inline-flex items-center gap-1 font-semibold">
                             <Target className="w-3 h-3" /> {attack.short}
                           </div>
+                          {isTopRisk && (
+                            <div className="mt-1 rounded bg-red-600/35 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-red-100 animate-pulse">
+                              Prioridad 1
+                            </div>
+                          )}
                           <div className="mt-0.5 text-[10px] text-slate-200">P {attack.probability} x I {attack.impact}</div>
                         </div>
                       ) : (
@@ -120,8 +126,14 @@ export default function Matriz() {
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {riskItems.map((item) => {
             const score = getScore(item.impact, item.probability);
+            const isTopRisk = item.name === 'Inyeccion de comandos';
             return (
-              <article key={item.name} className={`rounded-2xl border bg-slate-950/70 p-4 ${score >= 15 ? 'border-red-500/50 ring-1 ring-red-400/30 shadow-lg shadow-red-950/30' : score >= 8 ? 'border-amber-500/40 ring-1 ring-amber-300/20' : 'border-emerald-500/30'}`}>
+              <article key={item.name} className={`rounded-2xl border bg-slate-950/70 p-4 ${score >= 15 ? 'border-red-500/50 ring-1 ring-red-400/30 shadow-lg shadow-red-950/30' : score >= 8 ? 'border-amber-500/40 ring-1 ring-amber-300/20' : 'border-emerald-500/30'} ${isTopRisk ? 'relative overflow-hidden' : ''}`}>
+                {isTopRisk && (
+                  <span className="absolute right-3 top-3 rounded-full border border-red-300/40 bg-red-600/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] text-red-100 animate-pulse">
+                    Prioridad 1
+                  </span>
+                )}
                 <p className="text-sm font-semibold text-white">{item.name}</p>
                 <p className="mt-1 text-xs text-slate-400">CVSS 3.1: {item.cvss}</p>
                 <div className={`mt-3 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] ${getBadgeClasses(score)}`}>
