@@ -7,6 +7,21 @@ const Comandos = () => {
 
   return (
     <section className="space-y-6">
+      <div className="rounded-3xl border-2 border-red-300/70 bg-gradient-to-r from-red-950/60 via-red-800/35 to-orange-700/20 p-5 shadow-2xl shadow-red-950/60 ring-2 ring-red-300/40">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-red-200">Riesgo destacado de la prueba</p>
+            <h3 className="mt-1 text-2xl font-extrabold text-white">Riesgo Critico - Prioridad 1</h3>
+            <p className="mt-1 text-sm text-red-100/90">Compromete el servidor y puede afectar confidencialidad, integridad y disponibilidad del portal.</p>
+          </div>
+          <div className="inline-flex items-center gap-3 rounded-2xl border border-red-100/50 bg-red-600/45 px-4 py-3 text-white animate-pulse">
+            <span className="text-xs font-bold uppercase tracking-[0.16em]">Riesgo</span>
+            <span className="text-4xl font-extrabold leading-none">{riskScore}</span>
+            <span className="rounded-full border border-red-100/50 px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.08em]">P{probability}xI{impact}</span>
+          </div>
+        </div>
+      </div>
+
       <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-8 shadow-xl shadow-slate-950/20">
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-amber-500/10 text-amber-400">

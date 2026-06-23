@@ -7,6 +7,21 @@ const XSS = () => {
 
   return (
     <section className="space-y-6">
+      <div className="rounded-3xl border-2 border-amber-400/60 bg-gradient-to-r from-amber-900/35 via-amber-700/20 to-slate-800/20 p-5 shadow-2xl shadow-amber-950/30 ring-1 ring-amber-300/40">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-amber-200">Riesgo destacado de la prueba</p>
+            <h3 className="mt-1 text-2xl font-extrabold text-white">Riesgo Medio - Prioridad 3</h3>
+            <p className="mt-1 text-sm text-amber-100/90">Depende de interaccion de la victima, pero puede secuestrar sesion y habilitar suplantacion.</p>
+          </div>
+          <div className="inline-flex items-center gap-3 rounded-2xl border border-amber-200/40 bg-amber-500/25 px-4 py-3 text-white">
+            <span className="text-xs font-bold uppercase tracking-[0.16em]">Riesgo</span>
+            <span className="text-3xl font-extrabold leading-none">{riskScore}</span>
+            <span className="rounded-full border border-amber-100/40 px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.08em]">P{probability}xI{impact}</span>
+          </div>
+        </div>
+      </div>
+
       <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-8 shadow-xl shadow-slate-950/20">
         <div className="flex items-center gap-4">
           <div className="flex h-14 w-14 items-center justify-center rounded-3xl bg-rose-500/10 text-rose-400">

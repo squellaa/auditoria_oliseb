@@ -8,6 +8,21 @@ export default function InyeccionSQL() {
 
   return (
     <div className="space-y-6">
+      <div className="rounded-3xl border-2 border-red-400/60 bg-gradient-to-r from-red-900/35 via-red-700/25 to-amber-700/20 p-5 shadow-2xl shadow-red-950/40 ring-1 ring-red-300/40">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-red-200">Riesgo destacado de la prueba</p>
+            <h3 className="mt-1 text-2xl font-extrabold text-white">Riesgo Alto - Prioridad 2</h3>
+            <p className="mt-1 text-sm text-red-100/90">La explotacion SQLi permite exfiltracion masiva de datos de clientes y fraude de fidelizacion.</p>
+          </div>
+          <div className="inline-flex items-center gap-3 rounded-2xl border border-red-200/40 bg-red-600/35 px-4 py-3 text-white">
+            <span className="text-xs font-bold uppercase tracking-[0.16em]">Riesgo</span>
+            <span className="text-3xl font-extrabold leading-none">{riskScore}</span>
+            <span className="rounded-full border border-red-100/40 px-2 py-0.5 text-xs font-semibold uppercase tracking-[0.08em]">P{probability}xI{impact}</span>
+          </div>
+        </div>
+      </div>
+
       <div className="flex justify-between items-center border-b border-slate-800 pb-4">
         <h2 className="text-2xl font-bold text-white flex items-center gap-3">
           <Database className="text-amber-500 w-7 h-7" /> Inyección SQL (SQLi)
