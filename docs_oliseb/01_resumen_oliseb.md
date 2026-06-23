@@ -9,3 +9,13 @@ El portal constituye un activo crítico porque almacena información sensible de
 ## Riesgos asociados
 
 Dado que el portal maneja tarjetas de fidelización y datos de compra, cualquier vulnerabilidad permite el acceso a información financiera y personal. Esto puede traducirse en fraude de puntos, suplantación de identidad, acceso no autorizado a cuentas de clientes y abuso comercial.
+
+## Tabla consolidada CVSS 3.1 (Informe A)
+
+| Vulnerabilidad | CVSS 3.1 | Severidad | Riesgo negocio (P x I) |
+|---|---:|---|---:|
+| Inyeccion SQL | 8.2 | Alta | 16 (4 x 4) |
+| XSS Reflejado | 6.1 | Media | 9 (3 x 3) |
+| Inyeccion de Comandos | 9.8 | Critica | 20 (4 x 5) |
+
+La priorizacion se realiza combinando el puntaje tecnico CVSS con el impacto de negocio para SuperMax.
