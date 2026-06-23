@@ -23,11 +23,19 @@ Mapa de calor:
 - Inyeccion SQL: Probabilidad 4, Impacto 4, Riesgo 16 (Rojo).
 - XSS reflejado: Probabilidad 3, Impacto 3, Riesgo 9 (Amarillo/Naranjo).
 
+En el mapa de calor del sitio React, cada ataque queda marcado sobre su celda con su etiqueta y coordenada (P x I), para visualizar directamente por que queda en zona roja o naranjo.
+
 ## Justificacion de priorizacion
 
 - Inyeccion de comandos queda en prioridad 1 porque compromete infraestructura y continuidad del portal retail. CVSS 9.8 y riesgo 20.
 - Inyeccion SQL queda en prioridad 2 por exposicion masiva de datos de clientes y fraude de beneficios. CVSS 8.2 y riesgo 16.
 - XSS reflejado queda en prioridad 3 porque depende de interaccion de la victima, aunque mantiene riesgo sobre sesiones. CVSS 6.1 y riesgo 9.
+
+Detalle de puntaje:
+
+- Riesgo 20 (CMD) = Probabilidad 4 (explotacion factible) x Impacto 5 (compromiso de servidor).
+- Riesgo 16 (SQLi) = Probabilidad 4 (payload repetible) x Impacto 4 (exfiltracion masiva de clientes).
+- Riesgo 9 (XSS) = Probabilidad 3 (requiere interaccion) x Impacto 3 (secuestro de sesion y fraude).
 
 ## Coherencia CVSS + Matriz (3.1.3)
 

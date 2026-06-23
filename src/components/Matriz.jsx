@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, AlertTriangle } from 'lucide-react';
+import { Shield, AlertTriangle, Target } from 'lucide-react';
 
 export default function Matriz() {
   const probabilityLevels = [1, 2, 3, 4, 5];
@@ -8,6 +8,7 @@ export default function Matriz() {
   const riskItems = [
     {
       name: 'Inyeccion de comandos',
+      short: 'CMD',
       probability: 4,
       impact: 5,
       cvss: '9.8 (Critica)',
@@ -15,6 +16,7 @@ export default function Matriz() {
     },
     {
       name: 'Inyeccion SQL',
+      short: 'SQLi',
       probability: 4,
       impact: 4,
       cvss: '8.2 (Alta)',
@@ -22,6 +24,7 @@ export default function Matriz() {
     },
     {
       name: 'XSS reflejado',
+      short: 'XSS',
       probability: 3,
       impact: 3,
       cvss: '6.1 (Media)',
@@ -32,9 +35,9 @@ export default function Matriz() {
   const getScore = (impact, probability) => impact * probability;
 
   const getCellClasses = (score) => {
-    if (score >= 15) return 'bg-red-500/20 text-red-100 border-red-600';
-    if (score >= 8) return 'bg-amber-500/20 text-amber-100 border-amber-600';
-    return 'bg-emerald-500/20 text-emerald-100 border-emerald-600';
+    if (score >= 15) return 'bg-red-600/25 text-red-50 border-red-500';
+    if (score >= 8) return 'bg-amber-500/25 text-amber-50 border-amber-500';
+    return 'bg-emerald-500/20 text-emerald-50 border-emerald-500';
   };
 
   const getBadgeClasses = (score) => {
@@ -42,6 +45,9 @@ export default function Matriz() {
     if (score >= 8) return 'border-amber-500/25 bg-amber-500/10 text-amber-300';
     return 'border-emerald-500/25 bg-emerald-500/10 text-emerald-300';
   };
+
+  const getAttackAtCell = (impact, probability) =>
+    riskItems.find((item) => item.impact === impact && item.probability === probability);
 
   return (
     <div className="space-y-6">
@@ -63,7 +69,7 @@ export default function Matriz() {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-xl shadow-slate-950/30">
+      <div className="overflow-x-auto rounded-3xl border border-slate-700 bg-slate-900/90 p-4 shadow-xl shadow-red-950/20">
         <table className="min-w-full border-collapse text-sm">
           <thead>
             <tr>
@@ -79,12 +85,27 @@ export default function Matriz() {
                 <td className="px-4 py-3 text-slate-300 font-semibold">{impact}</td>
                 {probabilityLevels.map((probability) => {
                   const score = getScore(impact, probability);
+                  const attack = getAttackAtCell(impact, probability);
                   return (
                   <td
                     key={`${impact}-${probability}`}
-                    className={`${getCellClasses(score)} border px-4 py-4 text-center font-semibold`}
+                    className={`${getCellClasses(score)} border px-3 py-3 text-center font-semibold align-top min-w-28`}
                   >
-                    {score}
+                    <div className="flex flex-col items-center gap-2">
+                      <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-bold tracking-[0.08em] ${score >= 15 ? 'bg-red-700/60 ring-2 ring-red-300/60' : score >= 8 ? 'bg-amber-700/50' : 'bg-emerald-700/40'}`}>
+                        {score}
+                      </span>
+                      {attack ? (
+                        <div className="w-full rounded-lg border border-white/30 bg-slate-950/55 px-2 py-1 text-[11px] leading-4 text-white ring-1 ring-white/20">
+                          <div className="inline-flex items-center gap-1 font-semibold">
+                            <Target className="w-3 h-3" /> {attack.short}
+                          </div>
+                          <div className="mt-0.5 text-[10px] text-slate-200">P {attack.probability} x I {attack.impact}</div>
+                        </div>
+                      ) : (
+                        <span className="text-[10px] text-slate-300/70">-</span>
+                      )}
+                    </div>
                   </td>
                   );
                 })}
@@ -94,18 +115,21 @@ export default function Matriz() {
         </table>
       </div>
 
-      <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5">
-        <h3 className="text-base font-semibold text-white">Asignacion de puntaje por vulnerabilidad</h3>
+      <div className="rounded-3xl border border-slate-700 bg-slate-900/85 p-5">
+        <h3 className="text-base font-semibold text-white">Ataques marcados y justificacion del puntaje</h3>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
           {riskItems.map((item) => {
             const score = getScore(item.impact, item.probability);
             return (
-              <article key={item.name} className="rounded-2xl border border-slate-800 bg-slate-950/70 p-4">
+              <article key={item.name} className={`rounded-2xl border bg-slate-950/70 p-4 ${score >= 15 ? 'border-red-500/50 ring-1 ring-red-400/30 shadow-lg shadow-red-950/30' : score >= 8 ? 'border-amber-500/40 ring-1 ring-amber-300/20' : 'border-emerald-500/30'}`}>
                 <p className="text-sm font-semibold text-white">{item.name}</p>
                 <p className="mt-1 text-xs text-slate-400">CVSS 3.1: {item.cvss}</p>
                 <div className={`mt-3 inline-flex rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] ${getBadgeClasses(score)}`}>
                   P {item.probability} x I {item.impact} = {score}
                 </div>
+                <p className="mt-2 text-xs text-slate-400">
+                  Celda marcada en matriz: ({item.impact}, {item.probability})
+                </p>
                 <p className="mt-3 text-sm leading-6 text-slate-300">{item.reason}</p>
               </article>
             );
