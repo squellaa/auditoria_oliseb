@@ -1,6 +1,10 @@
 import { Terminal } from 'lucide-react';
 
 const Comandos = () => {
+  const probability = 4;
+  const impact = 5;
+  const riskScore = probability * impact;
+
   return (
     <section className="space-y-6">
       <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-8 shadow-xl shadow-slate-950/20">
@@ -36,16 +40,28 @@ const Comandos = () => {
           <h3 className="text-xl font-semibold text-slate-100">Impacto</h3>
           <p className="mt-4">Control del servidor, exfiltración de datos y compromiso de la infraestructura del portal.</p>
           <p className="mt-3 text-sm text-slate-500">CVSS 3.1: 9.8 (Crítica)</p>
+          <p className="mt-3 rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs text-red-200">
+            Puntaje de riesgo de negocio: Probabilidad {probability} x Impacto {impact} = {riskScore} (critico).
+          </p>
+          <p className="mt-2 text-xs text-slate-500">
+            Justificacion: el ataque compromete el servidor base y habilita lectura de archivos del sistema con impacto transversal en confidencialidad, integridad y disponibilidad.
+          </p>
         </div>
       </div>
 
       <div className="rounded-3xl border border-slate-800/80 bg-slate-950/60 p-6 text-slate-400 shadow-xl shadow-slate-950/20">
-        <h3 className="text-xl font-semibold text-slate-100">Mitigación</h3>
+        <h3 className="text-xl font-semibold text-slate-100">Politica de prevencion (3.1.4)</h3>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-400">
           <li>Evitar la ejecución de comandos del sistema con datos de usuario.</li>
           <li>Usar APIs seguras de alto nivel en lugar de `exec` o `shell`.</li>
           <li>Implementar listas blancas y ejecutar procesos como un usuario con mínimos privilegios.</li>
         </ul>
+        <h4 className="mt-5 text-base font-semibold text-slate-100">Control de mitigacion (3.1.5)</h4>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-slate-400">
+          <li>Aislar el servicio en contenedor sin acceso directo al sistema operativo anfitrion.</li>
+          <li>Monitorear ejecucion de comandos anormales con alertas de seguridad en servidor.</li>
+        </ul>
+        <p className="mt-3 text-xs text-slate-500">Marco de referencia: OWASP Top 10 A03, OWASP ASVS V10, NIST SP 800-53 SI-4 e IR-4.</p>
       </div>
     </section>
   );
